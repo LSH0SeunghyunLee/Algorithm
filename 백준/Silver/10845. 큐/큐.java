@@ -7,7 +7,7 @@ import java.util.Queue;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        Queue<String> queue = new LinkedList<>();
+        LinkedList<String> queue = new LinkedList<>();
 
         int num = Integer.parseInt(br.readLine());
 
@@ -45,7 +45,7 @@ public class Main {
                     if (queue.isEmpty()) {
                         System.out.println(-1);
                     } else {
-                        System.out.println(((LinkedList<String>) queue).getLast());
+                        System.out.println(queue.getLast());
                     }
                     break;
             }
