@@ -1,25 +1,28 @@
 import java.io.*;
-import java.util.*;
-public class Main {
 
+public class Main {
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int t = Integer.parseInt(br.readLine());  //테스트 케이스 개수
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < t; i++) {
-            String s = br.readLine();
-            int add = 0;  //더할 점수
-            int score = 0;  //점수
-            for (int j = 0; j < s.length(); j++) {
-                if (s.charAt(j) == 'O') {
-                    add++;  //더할 점수 +1
-                    score += add;  //총점수에 더함
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+
+        int A = Integer.parseInt(in.readLine());
+
+        for (int i = 0; i < A; i++) {
+            String B = in.readLine();
+
+            int C = 0;
+            int D = 0;
+
+            for (int j = 0; j < B.length(); j++) {
+                if (B.charAt(j) == 'O') {
+                    C++;
+                    D += C;
                 } else {
-                    add = 0;  //X이면 더할 점수 초기화
+                    C = 0;
                 }
             }
-            sb.append(score + "\n");
+            System.out.println(D);
         }
-        System.out.print(sb);
+
+        in.close();
     }
 }
