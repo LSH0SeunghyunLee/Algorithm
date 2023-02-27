@@ -3,13 +3,11 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class Solution {
-	public static void main(String[] args) throws NumberFormatException, IOException {
+	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
@@ -20,22 +18,23 @@ public class Solution {
 			
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			
-			int[] arr = new int[N];
+			PriorityQueue<Integer> pq = new PriorityQueue<>();
 			
 			for (int i = 0; i < N; i++) {
-				arr[i] = Integer.parseInt(st.nextToken());
+				pq.offer(Integer.parseInt(st.nextToken()));
 			}
-			
-			Arrays.sort(arr);
 			
 			bw.write("#" + tc + " ");
-			for (int i = 0; i < arr.length; i++) {
-				bw.write(arr[i] + " ");
+			
+			for (int i = 0; i < N; i++) {
+				bw.write(pq.poll() + " ");
 			}
+			
 			bw.newLine();
 		}
-
+		
 		bw.flush();
 		bw.close();
+		
 	}
 }
