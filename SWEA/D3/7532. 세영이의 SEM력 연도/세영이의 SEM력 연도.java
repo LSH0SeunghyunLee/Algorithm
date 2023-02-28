@@ -15,18 +15,15 @@ public class Solution {
 		for (int tc = 1; tc <= testcase; tc++) {
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			
-			int S = Integer.parseInt(st.nextToken());
-			int E = Integer.parseInt(st.nextToken());
-			int M = Integer.parseInt(st.nextToken());
-
-			int cnt = 0;
+			int S = Integer.parseInt(st.nextToken()) - 1;
+			int E = Integer.parseInt(st.nextToken()) - 1;
+			int M = Integer.parseInt(st.nextToken()) - 1;
 			
-			while (true) {
-				cnt++;
-				if ((cnt - S) % 365 == 0 && (cnt - E) % 24 == 0 && (cnt - M) % 29 == 0) break;
+			while (S % 24 != E || S % 29 != M) {
+				S += 365;
 			}
 			
-			bw.write("#" + tc + " " + cnt);
+			bw.write("#" + tc + " " + (S + 1));
 			bw.newLine();
 		}
 
