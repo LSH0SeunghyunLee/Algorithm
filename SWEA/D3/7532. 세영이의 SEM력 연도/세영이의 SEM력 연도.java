@@ -23,13 +23,7 @@ public class Solution {
 			
 			while (true) {
 				cnt++;
-				int initS = cnt % 365;
-				int initE = cnt % 24;
-				int initM = cnt % 29;
-				if (initS == 0) initS = 365;
-				if (initE == 0) initE = 24;
-				if (initM == 0) initM = 29;
-				if (initS == S && initE == E && initM == M) break;
+				if ((cnt - S) % 365 == 0 && (cnt - E) % 24 == 0 && (cnt - M) % 29 == 0) break;
 			}
 			
 			bw.write("#" + tc + " " + cnt);
