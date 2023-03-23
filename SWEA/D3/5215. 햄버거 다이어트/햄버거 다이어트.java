@@ -2,9 +2,8 @@ import java.io.*;
 import java.util.StringTokenizer;
 
 public class Solution {
-    static int N, L, max;
+    static int N, L, max, score;
     static int[][] arr;
-    static boolean[] sel;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -25,10 +24,10 @@ public class Solution {
                 arr[i][1] = Integer.parseInt(st.nextToken());
             }
 
-            sel = new boolean[N];
             max = 0;
+            score = 0;
 
-            powerset(0);
+            powerset(0, 0);
 
             bw.write("#" + tc + " " + max);
             bw.newLine();
@@ -38,29 +37,16 @@ public class Solution {
         bw.close();
     }
 
-    public static void powerset(int idx) {
-        if (idx == N) {
-            int temp = sum()[0];
-            int sum = sum()[1];
-            if (sum < L && max < temp) max = temp;
-            return;
+    public static void powerset(int n, int idx) {
+        if (n <= L) {
+            if (max < score) max = score;
         }
+        if (n > L) return;
 
-        sel[idx] = true;
-        powerset(idx+1);
-
-        sel[idx] = false;
-        powerset(idx+1);
-    }
-
-    public static int[] sum() {
-        int[] sum = new int[2];
-        for (int i = 0; i < N; i++) {
-            if (sel[i]) {
-                sum[0] += arr[i][0];
-                sum[1] += arr[i][1];
-            }
+        for (int i = idx; i < N; i++) {
+            score += arr[i][0];
+            powerset(n+arr[i][1], i+1);
+            score -= arr[i][0];
         }
-        return sum;
     }
 }
