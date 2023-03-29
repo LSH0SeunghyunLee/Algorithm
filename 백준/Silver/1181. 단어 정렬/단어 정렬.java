@@ -1,48 +1,43 @@
 import java.io.*;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.StringTokenizer;
-import java.util.TreeMap;
 
 public class Main {
-    static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-    static BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
-
     public static void main(String[] args) throws IOException {
-        StringTokenizer tokenizer = new StringTokenizer(in.readLine());
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int N = Integer.parseInt(tokenizer.nextToken());
+        int N = Integer.parseInt(br.readLine());
 
-        String[] list = new String[N];
+        String[] line = new String[N];
 
         for (int i = 0; i < N; i++) {
-            list[i] = in.readLine();
+            line[i] = br.readLine();
         }
 
-        Arrays.sort(list, new Comparator<String>() {
+        Arrays.sort(line, new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
-                if (o1.length() == o2.length()) {
-                    return o1.compareTo(o2);
-                } else {
+                if (o1.length() != o2.length()) {
                     return o1.length() - o2.length();
+                } else {
+                    for (int i = 0; i < o1.length(); i++) {
+                        if (o1.charAt(i) == o2.charAt(i)) continue;
+                        else if (o1.charAt(i) > o2.charAt(i)) return 1;
+                        else return -1;
+                    }
                 }
+                return 1;
             }
         });
-        
-        StringBuilder sb = new StringBuilder();
-        
-        sb.append(list[0]).append('\n');
 
-        for (int i = 1; i < N; i++) {
-            if (!list[i].equals(list[i-1])) {
-                sb.append(list[i]).append('\n');
-            }
+        for (int i = 0; i < N; i++) {
+            if (i > 0 && line[i].equals(line[i-1])) continue;
+            bw.write(line[i]);
+            bw.newLine();
         }
-        out.write(String.valueOf(sb));
 
-        in.close();
-        out.flush();
-        out.close();
+        bw.flush();
+        bw.close();
     }
 }
