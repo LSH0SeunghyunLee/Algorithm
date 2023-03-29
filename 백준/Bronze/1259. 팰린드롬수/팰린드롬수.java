@@ -1,31 +1,26 @@
 import java.io.*;
 
 public class Main {
-    static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-    static BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
-
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
         while (true) {
-            String answer = "yes";
+            String msg = "yes";
 
-            String N = in.readLine();
+            String line = br.readLine();
+            if (line.equals("0")) break;
 
-            if (Integer.parseInt(N) == 0) {
-                break;
-            } else {
-                for (int i = 0; i < N.length()/2; i++) {
-                    if (N.charAt(i) != N.charAt(N.length() - (i + 1))) {
-                        answer = "no";
-                        break;
-                    }
-                }
+            for (int i = 0; i < line.length()/2; i++) {
+                if (line.charAt(i) == line.charAt(line.length()-i-1)) continue;
+                else msg = "no";
             }
-            out.write(answer);
-            out.newLine();
+
+            bw.write(msg);
+            bw.newLine();
         }
 
-        in.close();
-        out.flush();
-        out.close();
+        bw.flush();
+        bw.close();
     }
 }
