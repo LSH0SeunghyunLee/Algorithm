@@ -1,28 +1,26 @@
 import java.io.*;
-import java.util.StringTokenizer;
-
-import static java.lang.Math.*;
+import java.util.*;
 
 public class Main {
-    static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-    static BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
+    static int min;
 
     public static void main(String[] args) throws IOException {
-        StringTokenizer tokenizer = new StringTokenizer(in.readLine());
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int x = Integer.parseInt(tokenizer.nextToken());
-        int y = Integer.parseInt(tokenizer.nextToken());
-        int w = Integer.parseInt(tokenizer.nextToken());
-        int h = Integer.parseInt(tokenizer.nextToken());
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int minxy = min(x, y);
-        int minwh = min(w-x, h-y);
-        int min = min(minxy, minwh);
+        int x = Integer.parseInt(st.nextToken());
+        int y = Integer.parseInt(st.nextToken());
+        int w = Integer.parseInt(st.nextToken());
+        int h = Integer.parseInt(st.nextToken());
 
-        out.write(String.valueOf(min));
+        min = Integer.MAX_VALUE;
 
-        in.close();
-        out.flush();
-        out.close();
+        min = Math.min(Math.min(w-x, x), Math.min(h-y, y));
+
+        bw.write(min + "");
+        bw.flush();
+        bw.close();
     }
 }
