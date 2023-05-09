@@ -6,18 +6,21 @@ public class Main {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         while (true) {
-            String msg = "yes";
-
             String line = br.readLine();
+
             if (line.equals("0")) break;
 
-            for (int i = 0; i < line.length()/2; i++) {
-                if (line.charAt(i) == line.charAt(line.length()-i-1)) continue;
-                else msg = "no";
+            int flag = 0;
+
+            for (int i = 0; i <= line.length()/2; i++) {
+                if (line.charAt(i) != line.charAt(line.length() - (i + 1))) {
+                    flag = 1;
+                    break;
+                }
             }
 
-            bw.write(msg);
-            bw.newLine();
+            if (flag != 1) System.out.println("yes");
+            else System.out.println("no");
         }
 
         bw.flush();
