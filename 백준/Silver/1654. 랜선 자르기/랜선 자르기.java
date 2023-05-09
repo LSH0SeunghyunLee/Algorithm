@@ -21,11 +21,10 @@ public class Main {
         }
 
         long start = 0;
-        long mid = 0;
         long end = max+1;
 
         while (start < end) {
-            mid = (start + end) / 2;
+            long mid = (start + end) / 2;
 
             long cnt = 0;
 
