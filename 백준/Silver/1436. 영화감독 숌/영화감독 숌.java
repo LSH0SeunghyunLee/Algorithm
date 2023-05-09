@@ -1,27 +1,26 @@
 import java.io.*;
 
 public class Main {
-    static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-    static BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
-
     public static void main(String[] args) throws IOException {
-        int N = Integer.parseInt(in.readLine());
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int end = 666;
-        int cnt = 1;
+        int N = Integer.parseInt(br.readLine());
 
-        while (cnt != N) {
-            end++;
+        int start = 666;
+        int cnt = 0;
 
-            if (String.valueOf(end).contains("666")) {
+        while (true) {
+            if (String.valueOf(start).contains("666")) {
                 cnt++;
+                if (cnt == N) break;
             }
+
+            start++;
         }
 
-        out.write(String.valueOf(end));
-
-        in.close();
-        out.flush();
-        out.close();
+        bw.write(start+"");
+        bw.flush();
+        bw.close();
     }
 }
