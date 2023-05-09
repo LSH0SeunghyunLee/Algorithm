@@ -2,51 +2,43 @@ import java.io.*;
 import java.util.StringTokenizer;
 
 public class Main {
-    static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-    static BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
-
     public static void main(String[] args) throws IOException {
-        StringTokenizer tokenizer = new StringTokenizer(in.readLine());
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int K = Integer.parseInt(tokenizer.nextToken());
-        int N = Integer.parseInt(tokenizer.nextToken());
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int[] list = new int[K];
+        int K = Integer.parseInt(st.nextToken());
+        long N = Long.parseLong(st.nextToken());
+
+        long[] arr = new long[K];
 
         long max = 0;
 
         for (int i = 0; i < K; i++) {
-            list[i] = Integer.parseInt(in.readLine());
-            if (max < list[i]) {
-                max = list[i];
-            }
+            arr[i] = Integer.parseInt(br.readLine());
+            if (max < arr[i]) max = arr[i];
         }
 
-        max++;
-
-        long min = 0;
+        long start = 0;
         long mid = 0;
+        long end = max+1;
 
-        while (min < max) {
-            mid = (max + min) / 2;
+        while (start < end) {
+            mid = (start + end) / 2;
 
-            long count = 0;
+            long cnt = 0;
 
             for (int i = 0; i < K; i++) {
-                count += (list[i] / mid);
+                cnt += (arr[i] / mid);
             }
 
-            if(count < N) {
-                max = mid;
-            } else {
-                min = mid + 1;
-            }
+            if (cnt < N) end = mid;
+            else start = mid + 1;
         }
 
-        out.write(String.valueOf(min - 1));
-
-        in.close();
-        out.flush();
-        out.close();
+        bw.write((start - 1) + "");
+        bw.flush();
+        bw.close();
     }
 }
