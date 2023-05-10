@@ -1,52 +1,49 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Stack;
 
 public class Main {
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
-        int[] arr = new int[n];
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        int N = Integer.parseInt(br.readLine());
+
+        int start = 1;
+        int flag = 0;
+
         StringBuilder sb = new StringBuilder();
-        int index = 0;
-        int num = 1;
 
-        for(int i = 0; i < n; i++) {
-            arr[i] = Integer.parseInt(br.readLine());
-        }
+        Stack<Integer> stack = new Stack<>();
 
-        Stack<Integer> stack = new Stack<Integer>();
+        for (int i = 0; i < N; i++) {
+            int num = Integer.parseInt(br.readLine());
 
-        while(index < n) {
-            if(!stack.empty() && arr[index] < stack.get(stack.size() - 1)) {
-                break;
-            }else if(!stack.empty() && arr[index] == stack.get(stack.size() - 1)) {
-                stack.pop();
-                sb.append("-").append("\n");
-                index++;
-            }else {
-                while(num <= n) {
-                    if(arr[index] != num) {
-                        stack.push(num);
-                        sb.append("+").append("\n");
-                        num++;
-                    }else {
-                        stack.push(num);
-                        sb.append("+").append("\n");
-                        num++;
-                        break;
-                    }
+            if (start <= num) {
+                for (int j = start; j <= num; j++) {
+                    stack.push(j);
+                    sb.append("+\n");
                 }
+                start = num + 1;
+            }
+
+            if (stack.peek() == num) {
+                stack.pop();
+                sb.append("-\n");
+            } else {
+                flag = 1;
+                break;
             }
         }
 
-        if(index == n) {
-            System.out.println(sb);
-        }else {
-            System.out.println("NO");
+        while (!stack.empty()) {
+            stack.pop();
+            sb.append("-\n");
         }
-    }
 
+        if (flag == 0) bw.write(sb.toString());
+        else bw.write("NO");
+
+        bw.flush();
+        bw.close();
+    }
 }
