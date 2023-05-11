@@ -2,32 +2,28 @@ import java.io.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int N = Integer.parseInt(in.readLine());
+        int N = Integer.parseInt(br.readLine());
 
+        int start = 0;
         int cnt = 0;
-        int cnt2 = 1;
-        int idx = 0;
+        int result = 0;
 
         while (true) {
-            if (N==1) {
-                idx = -1;
+            result++;
+            
+            if (start < N && N <= 1 + 6 * cnt) {
                 break;
             }
-            if (1+6*cnt < N && N <= 1+6*cnt2) {
-                break;
-            }
-            cnt=cnt2;
-            cnt2=cnt+2+idx++;
+
+            start = 1 + 6 * cnt;
+            cnt += result;
         }
 
-        out.write(String.valueOf(idx+2));
-        out.newLine();
-
-        in.close();
-        out.flush();
-        out.close();
+        bw.write(result + "");
+        bw.flush();
+        bw.close();
     }
 }
